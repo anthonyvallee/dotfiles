@@ -1,0 +1,18 @@
+# Arch Linux/Manjaro setup
+- Update pacman mirrorlist (sudo pacman-mirrors -i -c all)
+  - https://mirror.math.princeton.edu/pub/manjaro/
+- Update system (sudo pacman -Syu)
+- Swap Ctrl/CapsLock in /etc/X11/xorg.conf.d/00-keyboard.conf
+  # Swaps LeftCtrl and CapsLock
+  # Lists through layouts with Shift-Shift
+  Option "XkbOptions" "ctrl:swapcaps,grp:shifts_toggle"
+- Fix screen tearing
+  # Either of these files:
+  # /etc/X11/xorg.conf.d/90-mhwd.conf
+  # in Section "Device" (intel)
+  "Option" "TearFree" "true"
+
+# Emacs
+- Add emacs daemon as user service on startup
+- Create ~/.zshenv file
+  - Path and environment variables should be exported here
