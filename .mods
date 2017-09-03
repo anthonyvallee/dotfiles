@@ -1,0 +1,69 @@
+------------------------------
+Branch       : galliumos-xfce/2017
+Distribution : GalliumOS 2.1
+Computer     : Acer C720
+Begin date   : Sept. 2017
+------------------------------
+* Preconfiguration
+
+- Update and upgrade system
+  > sudo apt update
+  > sudo apt dist-upgrade
+
+- Install Git
+  `> sudo apt install git
+     git config --global user.name "Anthony Vallee"
+     git config --global user.email "tony.vallee@hotmail.com"
+  `
+
+- Install Zsh and Oh My Zsh
+  `> sudo apt install zsh
+     chsh -s $(which zsh)
+     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  `
+
+- Import .dotfiles config
+  `> rm ~/.zshrc && ln -s ~/.dotfiles/.zshrc ~/.zshrc
+     ln -s ~/.dotfiles/.zshenv ~/.zshenv
+     source ~/.zshenv && source ~/.zshrc
+  `
+
+- Install Powerline fonts
+  `> cd ~/Downloads
+     git clone https://github.com/powerline/fonts.git --depth=1
+     cd fonts
+     ./install.sh
+     cd ..
+     rm -rf fonts
+  `
+
+- Install Emacs
+  `> sudo add-apt-repository ppa:kelleyk/emacs
+     sudo apt-get update
+     sudo apt-get install emacs25
+  `
+
+- Install Spacemacs
+  `> rm -rf ~/.emacs.d
+     git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+     emacs
+  `
+  - Exit Emacs after Spacemacs is installed
+  > ln -s ~/.dotfiles/.spacemacs ~/.spacemacs
+
+- Run emacs daemon with systemd
+  `> cp ~/.dotfiles/.config/systemd/user/emacs.service ~/.config/systemd/user/emacs.service
+     sudo systemctl enable --user emacs
+     sudo systemctl start --user emacs
+  `
+
+- Fetch configuration
+  > git clone https://github.com/anthonyvallee/dotfiles.git ~/.dotfiles
+  > git checkout galliumos-xfce/2017
+
+------------------------------
+* Configuration
+
+- Apply keyboard layout configuration
+  > cp ~/.dotfiles/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml
+  - (Optional) Reboot to apply changes.
